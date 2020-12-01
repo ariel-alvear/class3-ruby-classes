@@ -15,19 +15,12 @@ end
 class MonthlyAppointment < Appointment
     attr_accessor :day
     def initialize(location, purpose, hour, min, day)
-        @location = location
-        @purpose = purpose
-        @hour = hour
-        @min = min
+        super(location, purpose, hour, min, day)
         @day = day
     end
 
     def occurs_on?(day)
-        if @day == day
-            true
-        else
-            false
-        end
+        @day == day
     end
 
     def to_s
@@ -38,11 +31,7 @@ end
 #child
 class DailyAppointment < Appointment
     def occurs_on?(hour, min)
-        if hour == @hour && min == @min
-            true
-        else
-            false
-        end
+        (hour == @hour) && (min == @min)
     end
 
     def to_s
@@ -52,23 +41,16 @@ end
 
 #child
 class OneTimeAppointment < Appointment
-    attr_accessor :month, :year
+    attr_accessor :day, :month, :year
     def initialize(location, purpose, hour, min, day, month, year)
-        @location = location
-        @purpose = purpose
-        @hour = hour
-        @min = min
+        super(location, purpose, hour, min, day, month, year)
         @day = day
         @month = month
         @year = year
     end
 
     def occurs_on?(day, month, year)
-        if day == @day && month == @month && year == @year
-            true
-        else
-            false
-        end
+        (day == @day) && (month == @month) && (year == @year)
     end
 
     def to_s
